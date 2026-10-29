@@ -1,0 +1,1129 @@
+{
+  "meta": {
+    "id": "v_20261027-003005_0e7a",
+    "name": "Before prune 2026-10-26 20:30",
+    "at": "2026-10-27T00:30:05.967Z",
+    "author": "claude",
+    "auto": true,
+    "stats": {
+      "groups": 8,
+      "entries": 63,
+      "notes": 0,
+      "pictures": 6,
+      "cards": 8
+    }
+  },
+  "content": {
+    "title": "wargames",
+    "brief": {
+      "sections": [
+        {
+          "id": "s_f8a597e7",
+          "title": "What we're building",
+          "text": "Were designing a cozy isometric snowball fight game.  There are two teams, each team, has 4 players.  This is a single player game so I'm leaving it vague for you to decide.  ",
+          "updatedBy": "user",
+          "updatedAt": "2026-10-26T19:34:17.041Z"
+        },
+        {
+          "id": "s_055c0a14",
+          "title": "Decided (Foreman; host's calls outrank everything)",
+          "text": "- 1 human + 3 AI allies (Pip, Scoop, Waffle) vs 4 AI. Match = first to 2 rounds of 120s (host): your hill, their hill, the park only at 1-1.\n- Round: most crown-seconds with the toboggan. Sled starts beside the human in round 1, foot-centre in rounds 2–3. Every crown = same flat saddle. Tie → sudden death, capped 60s.\n- Clock: afternoon → dusk (≥4 steps) → streetlights at 120s, plus a 20s countdown. Lighting resets between rounds.\n- Camera: one fixed iso shot, whole ~26m hill, kids ~48px at 720p. No pan.\n- Controls (host): mouse only. Right-click walks toward the cursor, left-click throws (hands off while carrying), middle-click builds.\n- No elimination: a chilled kid warms up at the cocoa stand, ~8s, out of play. Target ≤2 chills per kid per round (bench + siege chills counted together, <15%).\n- Garage shop (host, rule 4): 4 credits per round guaranteed + hits + crown time; one purchase per visit; ice 4, melter 4, rock 8, snowman 8, launcher 10; upgrades last the match only. Shop screen may use text. Not yet built: bazooka, igloo, fort.\n- Plain snowball = fast flat line, never clears a wall. Wall: one per kid, 1s plant at your feet, 8s cooldown (ghost footprint). Nothing built on the crown.\n- Hits: first kid touched below head height in flight, or anyone in the ring at touchdown. One hit chills. No friendly fire.\n- AI: Beanie, Pockets (blower), Brick (never throws), Copycat; fair-bot dodging.\n- SIEGE: whoever holds the crown faces one shared volley, ONE release frame per cadence, never more than 4 live rings. Defenders 8m+ bracket the carrier's path; closer ones throw one direct shot. Cadence 2.0 / 1.5 / 1.45s per street; street 3 adds a second blower.\n- Session: up to 3 named streets (Maple Court, Ivy Terrace, The Summit Kids); nothing carries between streets.\n\nNEXT: Systems builds the siege, reruns the bot log against the 'Host playtest 1' limits, then the host plays again.",
+          "updatedBy": "claude",
+          "createdAt": "2026-10-26T19:50:06.048Z",
+          "updatedAt": "2026-10-26T23:13:21.913Z"
+        },
+        {
+          "id": "s_9ee1a2bd",
+          "title": "Hook: Snow Day (Creative v0)",
+          "text": "Chestnut Street against three rival streets, three sledding hills each, and the streetlights are about to come on. Get the toboggan to the crown and hold it there longer than they do.\nTONE: cozy = warm, silly, low stakes. Every upgrade is garage or kitchen junk: the launcher is a tennis-ball thrower, the rock is dirty plough ice, the bazooka is a cardboard-tube snow cannon. If it looks like a weapon ad, reskin it.\nFIRST 30s: the whistle, sled 2–3m from your porch, everybody sprints. No tutorial; teach by racing.\nLIGHT: the sky resets each round because it is the round clock, not the evening's.",
+          "updatedBy": "claude",
+          "createdAt": "2026-10-26T19:50:53.915Z",
+          "updatedAt": "2026-10-26T23:15:44.401Z"
+        },
+        {
+          "id": "s_979f79db",
+          "title": "What a good throw feels like (Creative)",
+          "text": "A snowball is a hard flat line (0.35s + 0.05s/m) arriving as the kid flinches; a free, watching kid at 6–10m is hit ≥60%. Reflex-dodging is NOT the skill.\n1) The skill is the angle: a kid facing you sees it; one at your side, behind, or busy can't. A 30–45% match hit rate is healthy.\n2) A plain ball NEVER clears a wall — walls are the reason to move. Only the blower (0.50s + 0.12s/m) arcs.\n3) A miss looks like a near miss: it skids past the boots, ≥80% within 1.2m.",
+          "updatedBy": "agent:~deepseek/deepseek-flash-latest=creative",
+          "createdAt": "2026-10-26T20:06:10.932Z",
+          "updatedAt": "2026-10-26T23:04:29.442Z"
+        },
+        {
+          "id": "s_08cc96e4",
+          "title": "Greybox verdict rules (QA) — decide before we look",
+          "text": "Three first-timers, no coaching, one greybox match (first to 2 rounds of 120s, hill A, final camera, full dusk ending, porch screen). Temp audio on: whistle, crunch, sled shout, release, impact, wall break, lights clunk; no sound for a landing ring. No audio = void session.\n\nWATCH, nothing asked: 1) touches the sled within 20s; 2) hands off in the first minute (QA #23); 3) builds unprompted in round 1, and whether a cooldown press stops them; 4) says who's winning at 35s and 105s; 5) porch button + hover time (QA #24); 6) what they look at while carrying (QA #25). Write down the first unprompted complaint verbatim, with the minute.\nSTOPWATCH: seconds the human can't act (chilled, walking, at the stand; carrying is play). Target <15%; >25% = bench or walk too long.\nCSV: human's share of crown-seconds (QA #21); sudden-death rounds (>1 in 6 = scoring too flat); crown vs open-field chills.\nAFTER: what told you time was running out (sky or countdown)? How did you know the sled changed hands? Lose sight of sled or kid? What changed the score? Best moment? What did you do when not carrying? Reopen the shop on purpose?\n\nONE FIX PER FAILURE, agreed now:\n- never touches the sled → cut a rule or move a spawn, never a prompt.\n- never hands off → fix the ally wave, no text.\n- never builds → cut the human's build; Brick keeps his walls.\n- stops building after a cooldown press → bolder ghost footprint, no text.\n- can't say who's winning → fix the score strip.\n- loses the sled → camera or pennant failed; no new HUD.\n- not in the score (QA #21) → move the round 2–3 sled toward Chestnut; never slow allies.\n- picks 'Finish snow day' → don't shorten the clock. Bucket possession changes by 30s: mostly in the first 60s = fix crown/geometry; late = the ending failed.\n\nn=3 proves confusion, not fun. Fun verdict = the host playing a whole match.",
+          "updatedBy": "claude",
+          "createdAt": "2026-10-26T20:14:34.077Z",
+          "updatedAt": "2026-10-26T23:04:29.445Z"
+        }
+      ]
+    },
+    "flow": {
+      "nodes": [
+        {
+          "id": "n_0341b2df",
+          "title": "Snow Day whistle",
+          "notes": "Everyone starts on their own porch. Round 1: sled 2–3m from the human's porch (the tutorial), plain snowballs only. Rounds 2–3: sled at the foot of the hill, centre, with whatever the garage sold. Everybody sprints.",
+          "props": [],
+          "status": "accepted",
+          "author": "agent:~deepseek/deepseek-flash-latest=creative",
+          "x": 0,
+          "y": 0,
+          "createdAt": "2026-10-26T19:50:53.917Z",
+          "updatedAt": "2026-10-26T23:15:44.404Z",
+          "updatedBy": "claude"
+        },
+        {
+          "id": "n_bed27705",
+          "title": "Snowball exchange",
+          "notes": "Carry the sled to the crown and hold it; the carrier is slow and unarmed, so teammates escort and wall the approach (middle-click). Holding the crown draws a siege volley. Hit = chilled (see Cocoa stand).",
+          "props": [],
+          "status": "accepted",
+          "author": "agent:~deepseek/deepseek-flash-latest=creative",
+          "x": 300,
+          "y": 0,
+          "createdAt": "2026-10-26T19:50:53.918Z",
+          "updatedAt": "2026-10-26T23:15:44.408Z",
+          "updatedBy": "claude"
+        },
+        {
+          "id": "n_184cf0f5",
+          "title": "Streetlights = round over",
+          "notes": "Lights flicker on at 120s: most crown-seconds takes the round. Level = sudden death.",
+          "props": [],
+          "status": "accepted",
+          "author": "agent:~deepseek/deepseek-flash-latest=creative",
+          "x": 600,
+          "y": 0,
+          "createdAt": "2026-10-26T19:50:53.919Z",
+          "updatedAt": "2026-10-26T22:56:55.212Z",
+          "updatedBy": "claude"
+        },
+        {
+          "id": "n_61b51368",
+          "title": "Porch screen → Garage shop",
+          "notes": "Only while the match is still open. Porch screen: grudge line + round score, 'Continue'. Then the garage: one purchase per kid (rule 4); upgrades last the match. Then the next hill: yours, theirs, the park.",
+          "props": [],
+          "status": "accepted",
+          "author": "agent:~deepseek/deepseek-flash-latest=creative",
+          "x": 900,
+          "y": 0,
+          "createdAt": "2026-10-26T19:55:10.506Z",
+          "updatedAt": "2026-10-26T23:15:44.414Z",
+          "updatedBy": "claude"
+        },
+        {
+          "id": "n_59354de4",
+          "title": "Sudden death (capped 60s)",
+          "notes": "Per ROUND, not per match: if crown-seconds are level at the streetlights, sudden death. First team to hold the crown 5 continuous seconds; after 60s, the first crown-second wins. A match can never end tied.",
+          "props": [],
+          "status": "accepted",
+          "author": "agent:~deepseek/deepseek-flash-latest=creative",
+          "x": 900,
+          "y": 104,
+          "createdAt": "2026-10-26T20:11:13.652Z",
+          "updatedAt": "2026-10-26T20:23:22.837Z",
+          "updatedBy": "claude"
+        },
+        {
+          "id": "n_662e4a22",
+          "title": "Match end on the porch",
+          "notes": "First team to 2 rounds wins. Porch screen: the grudge line + score, then 'Next street' / 'Finish snow day' (win or lose). After street 3: 'New snow day' / 'Finish snow day'.",
+          "props": [],
+          "status": "accepted",
+          "author": "claude",
+          "x": 1200,
+          "y": 0,
+          "createdAt": "2026-10-26T20:23:22.848Z",
+          "updatedAt": "2026-10-26T20:38:18.549Z",
+          "updatedBy": "claude"
+        },
+        {
+          "id": "n_307f7174",
+          "title": "Cocoa stand",
+          "notes": "Side of the hill. Chilled kid walks over, warms up, jogs back: ~8s total. Out of play while there (not targetable, not counted). A dropped sled stays where it fell.",
+          "props": [],
+          "status": "accepted",
+          "author": "claude",
+          "x": 300,
+          "y": 160,
+          "createdAt": "2026-10-26T20:23:22.857Z",
+          "updatedAt": "2026-10-26T20:23:22.864Z",
+          "updatedBy": "claude"
+        },
+        {
+          "id": "n_da6c6172",
+          "title": "Frosty wakes up (bonus bout)",
+          "notes": "Played on 'Next street' / 'New snow day' only. 60s, your kid vs Frosty on the crown: 10 hits to melt him; his normal throws take 1 of your 3, his two specials are instant loss unless you're behind a fort (boulders also have a drawn lane you can step out of). Warnings 2.5s (burst) / 4.0s (boulders), then a 2s dizzy window. Four forts, they never break. Win: Frosty's hat on your porch snowman for the rest of the snow day — no credits, no free items. Lose: nothing.",
+          "props": [],
+          "status": "idea",
+          "author": "claude",
+          "x": 1500,
+          "y": 0,
+          "createdAt": "2026-10-27T00:07:53.898Z",
+          "updatedAt": "2026-10-27T00:28:34.088Z",
+          "updatedBy": "agent:deepseek/deepseek-v4.1-flash-1017=systems"
+        }
+      ],
+      "edges": [
+        {
+          "id": "e_5e985288",
+          "from": "n_0341b2df",
+          "to": "n_bed27705",
+          "label": "whistle",
+          "author": "agent:~deepseek/deepseek-flash-latest=creative"
+        },
+        {
+          "id": "e_19d246a3",
+          "from": "n_bed27705",
+          "to": "n_184cf0f5",
+          "label": "sun sets",
+          "author": "agent:~deepseek/deepseek-flash-latest=creative"
+        },
+        {
+          "id": "e_d72c94b3",
+          "from": "n_184cf0f5",
+          "to": "n_61b51368",
+          "label": "no team has 2 rounds yet",
+          "author": "agent:~deepseek/deepseek-flash-latest=creative"
+        },
+        {
+          "id": "e_1f5a556f",
+          "from": "n_184cf0f5",
+          "to": "n_59354de4",
+          "label": "scores level",
+          "author": "agent:~deepseek/deepseek-flash-latest=creative"
+        },
+        {
+          "id": "e_d46ddf80",
+          "from": "n_61b51368",
+          "to": "n_0341b2df",
+          "label": "next hill",
+          "author": "claude"
+        },
+        {
+          "id": "e_51e186a5",
+          "from": "n_59354de4",
+          "to": "n_61b51368",
+          "label": "no team has 2 rounds yet",
+          "author": "claude"
+        },
+        {
+          "id": "e_da80ba44",
+          "from": "n_184cf0f5",
+          "to": "n_662e4a22",
+          "label": "a team has 2 rounds",
+          "author": "claude"
+        },
+        {
+          "id": "e_64bbeccf",
+          "from": "n_59354de4",
+          "to": "n_662e4a22",
+          "label": "a team has 2 rounds",
+          "author": "claude"
+        },
+        {
+          "id": "e_91baca86",
+          "from": "n_bed27705",
+          "to": "n_307f7174",
+          "label": "hit = chilled",
+          "author": "claude"
+        },
+        {
+          "id": "e_f3e5b314",
+          "from": "n_307f7174",
+          "to": "n_bed27705",
+          "label": "~8s later",
+          "author": "claude"
+        },
+        {
+          "id": "e_7b2220de",
+          "from": "n_662e4a22",
+          "to": "n_da6c6172",
+          "label": "'Next street' / 'New snow day'",
+          "author": "claude"
+        },
+        {
+          "id": "e_49b35375",
+          "from": "n_da6c6172",
+          "to": "n_0341b2df",
+          "label": "next street's whistle",
+          "author": "claude"
+        }
+      ]
+    },
+    "brainstorm": {
+      "pages": [
+        {
+          "id": "p_main",
+          "name": "Brainstorm",
+          "objects": [
+            {
+              "id": "o_37635d9f",
+              "kind": "group",
+              "x": 2006,
+              "y": 1055,
+              "w": 320,
+              "h": 0,
+              "author": "user",
+              "claudeAdded": false,
+              "createdAt": "2026-10-26T19:34:24.259Z",
+              "updatedAt": "2026-10-26T23:15:32.718Z",
+              "updatedBy": "claude",
+              "title": "Snowball fight",
+              "color": "slate",
+              "entries": [
+                {
+                  "id": "en_dd1f825b",
+                  "label": "Scoring",
+                  "text": "1 pt/sec while the sled is carried on the crown; most at 120s wins the round. Credits buy upgrades, never decide a round.",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "user",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:43:32.750Z"
+                },
+                {
+                  "id": "en_f027352e",
+                  "label": "Porch screen: two lines, no stats",
+                  "text": "Line 1 = the grudge, and it may name one kid ('Maple Court took your hill — Beanie got you twice' / 'Pip took it back'). Line 2 = the round score. Between rounds: 'Continue' to the garage; match end adds the street buttons (rule 10). The only place history and names appear.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "agent:~deepseek/deepseek-flash-latest=creative",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-26T20:27:38.319Z"
+                }
+              ]
+            },
+            {
+              "id": "o_2c7f4109",
+              "kind": "group",
+              "x": 2766,
+              "y": 1055,
+              "w": 320,
+              "h": 0,
+              "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+              "claudeAdded": false,
+              "createdAt": "2026-10-26T19:51:41.768Z",
+              "updatedAt": "2026-10-26T23:15:32.699Z",
+              "updatedBy": "claude",
+              "title": "Core loop rules — Systems (numbers kept stable; 2 and 9 were cut)",
+              "color": "green",
+              "entries": [
+                {
+                  "id": "en_b4dcd037",
+                  "label": "1. Sled is carried, not camped",
+                  "text": "Carrier: 60% speed, can't throw or build. No stealing: the sled changes hands only when a chilled carrier drops it in place (anyone may then pick it up) or by a handoff (rule 6). A dropped sled stops scoring until grabbed. Camping = slow, unarmed target, so teammates escort.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:51:49.288Z"
+                },
+                {
+                  "id": "en_03ec6405",
+                  "label": "2. Idle sled slides home",
+                  "text": "Nobody touching the sled for 15s and it slides back to the bottom of the hill (kids shout). Score pauses. Kills the 0-0 turtle and forces someone to be the sucker.",
+                  "check": "none",
+                  "ruledOut": true,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-26T19:52:07.309Z"
+                },
+                {
+                  "id": "en_545725d1",
+                  "label": "3. Sudden death",
+                  "text": "Tie at the lights: first team to HOLD the crown 5 continuous s (a drop, chill or rival pickup resets to 0); after 60s the first crown-second wins. The cap never pauses.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:52:07.309Z"
+                },
+                {
+                  "id": "en_20f4ac14",
+                  "label": "4. Garage shop + economy (4/8/10 price ladder)",
+                  "text": "Between rounds only; every kid shops, bots included; upgrades last the match. Round 1 = plain snowballs.\nCREDITS: 1 per hit, 1 per 6 crown-seconds, 4 per round played, +2 per round win. No income cap; savings carry between rounds of the same match.\nPRICES: ice 4, melter 4, rock 8, snowman 8, launcher 10. Cheapest = 4 = a no-hit, no-crown round, so the shelf is never bare (QA #28).\nGUARDS: ONE purchase per visit. STREET TIER = the street's row in rule 10 (cadence, rings, mix, reaction); rival purchases never change it. Spending never touches scoring.\nBOT WISHLISTS (first affordable item, one per visit): Beanie ice → launcher → rock; Pockets melter → snowman (keeps the blower; his throws stay blower); Brick melter → ice; Copycat buys what the human just bought, else ice → launcher.\nCarriers can't throw, so upgrades pay off through handoff: an escort economy.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:52:07.310Z"
+                },
+                {
+                  "id": "en_84b227c9",
+                  "label": "5. Builds: snow wall by default",
+                  "text": "Middle-click plants ONE low wall (1.5m) at your feet, facing your aim. 1s plant (busy, can't dodge); planting again moves it. 8s cooldown after any plant or break. Blocks flat throws; ice and rock break it. A bought snowman replaces the wall (rule 7). Igloo and fort are host-approved structures, not built yet.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:52:07.310Z"
+                },
+                {
+                  "id": "en_6e5309b8",
+                  "label": "6b. Free-sled claim — allies never rob the human",
+                  "text": "Chestnut's three allies never claim a free sled while the HUMAN is the nearest Chestnut kid to it, for the first 4s the sled is free. They don't stop or wait: they run to support (crown, flank, wall) exactly as normal, and Pip still beats you to every loose sled you are not closest to. After 4s free, or the moment you are not nearest, ordinary Beanie logic applies and someone grabs it.\n\nWHY: the round-1 sled sits 2–3m from the porch, so Beanie logic alone decides the first possession before a first-timer's hands are even on the keys — exactly the spectator case QA #21 measures. This is a possession-assignment clause, not bot hesitation: no animation, nothing on screen, fair-bot rule untouched, and rivals are exempt (Maple's Beanie will still sprint at YOUR free sled). Fails safe: if human carry share is still under 1/3, move the sled start, never make the allies slower.",
+                  "check": "open",
+                  "ruledOut": true,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-26T20:29:07.582Z"
+                },
+                {
+                  "id": "en_773e1a8a",
+                  "label": "6. One order = handoff",
+                  "text": "While carrying, left-click shoves the sled to the one ally outlined within 6m (carrier types only, never Brick). Aimed elsewhere it does nothing — no toss, cooldown or sound — so a carry means walking. Teacher: an eligible ally within 6m with no ring on them waves for the sled. No text.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:52:07.311Z"
+                },
+                {
+                  "id": "en_d663bac5",
+                  "label": "7. Throwing: aim a spot, hard line",
+                  "text": "Mouse aims a landing ring (r 0.8m); left-click throws. Ring visible to all from commitment; ball casts a shadow dot. Your own ring hides while you carry; the handoff outline replaces it (QA #25).\n- Plain: 0.35s + 0.05s/m, flat, 12m, NEVER clears a wall.\n- Ice: 0.25s + 0.03s/m, flat, 12m, shatters the wall it hits.\n- Rock: plain flight (0.35s + 0.05s/m, 12m) but smashes through walls and snowmen and keeps going; a kid it chills is knocked 1.5m off the spot, so a carrier lands away from the sled they dropped.\n- Launcher: hold to spray pellets: 0.3s + 0.04s/m, 9m, ring 0.45m, scatter up to 0.5m, 15-ball hopper, 2.5s reload when empty. One pellet chills, same as a ball; balance it by price and the shop gate, not by a damage system.\n- Melter: walking into a rival wall or snowman melts it; touching a chilled teammate thaws them instantly (once per 6s). Host's call: this restores the ruled-out 'heal a chilled ally' idea.\n- Snowman: your build button makes a snowman instead of a wall (3 hits to break, 12s cooldown); it pelts rivals within 8m every 2.2s.\n- Blower (Pockets): 0.50s + 0.12s/m, high lob, clears walls, 14m.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:55:32.272Z"
+                },
+                {
+                  "id": "en_c0bf06d7",
+                  "label": "8. Nothing gets built on the crown",
+                  "text": "No walls inside the 4m crown circle or within 2m of the sled: no camping under cover.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:55:32.273Z"
+                },
+                {
+                  "id": "en_c9c225c0",
+                  "label": "10. Session ladder — 3 streets, no carry-over",
+                  "text": "Nothing carries between matches. Snow day = up to 3 streets (~20 min). Plain rings come from Beanie and Copycat, blower cappers from Pockets; Brick never throws.\nStreet 1 (Maple Court): mix Beanie, Pockets, Brick, Copycat; siege 2.0s; 2 plain (lead + one side) + 1 capper; reaction 0.60s.\nStreet 2 (Ivy Terrace): same mix; 1.5s; same rings; 0.50s.\nStreet 3 (The Summit Kids): Beanie + 2 Pockets + Brick; 1.45s; 1 plain lead + 2 cappers covering both exits; 0.45s.\nCadence floor 1.45s (0.85s plain flight to 10m + 0.6s). Never more than 4 live rings (QA #29).\nAfter each match: equal 'Next street' / 'Finish snow day'; after street 3: 'New snow day' / 'Finish snow day'. History only on the porch screen.",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T20:03:55.312Z"
+                },
+                {
+                  "id": "en_8e3d192b",
+                  "label": "11. Build numbers",
+                  "text": "One hit chills. Sled start: round 1 in the human's lane 2–3m from their porch; rounds 2–3 centre at the foot. Every crown = same flat 4m radius; only approaches change. Greybox reaction 0.50s (log header).\nSPEEDS: kid 4.5 m/s, carrier 2.7 m/s, no stamina or slope modifier. A DODGE is not a separate move: it's walking out of a ring. From a standstill a 0.8m step takes ~0.25s at run speed (acceleration included). The human dodges the same way with right-click; there is no dodge button.",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T20:11:24.445Z"
+                },
+                {
+                  "id": "en_4a46184d",
+                  "label": "12. Camera: one fixed iso shot",
+                  "text": "Whole ~26m hill in one 1280×720 frame (~49px/m, kids ~48px). No follow or pan; human, sled, crown, both porches and flanks always visible. Same footprint on all three hills. Each porch at the foot of its side; kids emerge in a 1.2m arc, human front-centre.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "claude",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T20:12:32.175Z"
+                },
+                {
+                  "id": "en_7e7d9dda",
+                  "label": "13. Busy vs free stance",
+                  "text": "BUSY (planting) can't move at all. A CARRIER can only walk at 2.7 m/s: 1.0m out of a ring in 0.37s, 2.0m in 0.74s. A FREE kid steps 0.8m in ~0.25s. That gap is why the siege bites and the bracket must come from range. The pose is the information.",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T20:13:13.269Z"
+                }
+              ]
+            },
+            {
+              "id": "o_7ce2dd9e",
+              "kind": "group",
+              "x": 3146,
+              "y": 1055,
+              "w": 320,
+              "h": 0,
+              "author": "agent:deepseek/deepseek-v4.1-flash-1017=qa",
+              "claudeAdded": false,
+              "createdAt": "2026-10-26T19:52:48.270Z",
+              "updatedAt": "2026-10-26T23:15:44.395Z",
+              "updatedBy": "claude",
+              "title": "QA: playtest risks — test these before adding anything",
+              "color": "rose",
+              "entries": [
+                {
+                  "id": "en_8ed7f28e",
+                  "label": "15. Outcomes read as aftermath — ACCEPTED",
+                  "text": "Spec in Art 'Feedback'. TEST: unlabelled 60s clip, ask 'how many throws missed?' None = misses aren't rendering; hit vs untouched unclear = chill state too subtle.",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=qa",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T20:07:31.174Z"
+                },
+                {
+                  "id": "en_09dc89e3",
+                  "label": "17. Cocoa stand out of play — ACCEPTED",
+                  "text": "TEST: log repeat-chills within 5s of returning; more than a couple = the stand is exposed, move it further off the hill.",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=qa",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T20:07:31.178Z"
+                },
+                {
+                  "id": "en_205be3a8",
+                  "label": "21. Is the human actually in the score?",
+                  "text": "Pip and Scoop can win without the human. CSV: crown-seconds per carrier. Share <1/3 is calibration, not a gate. FAIL only if share <1/3 AND, asked 'what changed the score?', they name only an ally's carry. FIX: move the round 2–3 sled 1.5m toward Chestnut; never slow allies.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=qa",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-26T20:26:56.342Z"
+                },
+                {
+                  "id": "en_520b4a4f",
+                  "label": "23. Handoff: count silent presses",
+                  "text": "A failed handoff is silent, so 'too far' and 'nobody eligible' look alike. From the input log, count carrying throw-presses with no handoff before the first success, per round. 1–2 = the wave taught it; 3+ = fix the wave (ally turns, arm higher), never a ring, number or tooltip; zero = 'never hands off'.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=qa",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-26T20:30:55.817Z"
+                },
+                {
+                  "id": "en_8e551a21",
+                  "label": "24. 'Next street' is the verdict — log the button",
+                  "text": "Log the button and hover seconds. Next fast = wants more; hovering Next ~10s then Finish = a cost not worth paying; Finish instantly = done. No prompting; Next never styled nicer than Finish.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=qa",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-26T20:30:55.820Z"
+                },
+                {
+                  "id": "en_20861ca2",
+                  "label": "25. Aim ring hidden while carrying — ACCEPTED (rule 7)",
+                  "text": "TEST: ask 'what were you looking at while carrying?' and 'how did you know where the rings would land?' Watching their own cursor = the ring is stealing the siege read.",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=qa",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T22:56:16.642Z"
+                },
+                {
+                  "id": "en_08114606",
+                  "label": "26. Shop limits — ACCEPTED",
+                  "text": "1) Spend between rounds only. 2) One purchase per visit, or the tour becomes a grind. 3) No unlocks across snow days, or 'Finish snow day' starts to cost something. TEST: does any first-timer reopen the shop unprompted? If not, it's a screen, not a system: cut prices, keep two items.",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=qa",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T22:56:16.645Z"
+                },
+                {
+                  "id": "en_f6d76363",
+                  "label": "28. Shop beginner fix — RULED",
+                  "text": "Cheapest item = 4 = what a no-hit, no-crown round pays, so the shop is never a locked door. Text allowed on the shop screen (host). TEST: ask 'what could you afford?'; counting aloud twice = the screen isn't reading.",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=qa",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T22:59:36.225Z"
+                },
+                {
+                  "id": "en_b3ee4a51",
+                  "label": "29. Max live rings — RULED: hard cap 4",
+                  "text": "A volley is held back if releasing it would put more than 4 siege rings in flight on one carrier (e.g. 2 plain + 2 cappers). CSV logs max live rings per carrier per round to confirm.",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=qa",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T23:01:38.947Z"
+                },
+                {
+                  "id": "en_83f39cb7",
+                  "label": "30. Melter and snowman — RULED: keep (host's picks), behaviour now in rule 7",
+                  "text": "Not cut: the host chose both and they're built. One line each added to rule 7, matching greybox/src/sim/const.ts. Each still faces the shop-phase win-rate gate.",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=qa",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T23:01:38.951Z"
+                },
+                {
+                  "id": "en_76e1b5cd",
+                  "label": "31. Siege vs bench — RULED: one combined number; if bench >15% with holds at 8–20s, cut warm-up 8s → 5s first",
+                  "text": "A chill costs ~8s, so <15% allows two chills per round; a willing carrier's 2–3 holds can blow that while the crown works fine. REPORT human chills + bench seconds as one number, not split by source. Bench >15% with holds at 8–20s: cut warm-up 8s → 5s first, move the stand second. Never shorten cadence for a bench number.",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=qa",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T23:01:38.954Z"
+                }
+              ]
+            },
+            {
+              "id": "o_6a81b7e4",
+              "kind": "group",
+              "x": 3526,
+              "y": 1055,
+              "w": 320,
+              "h": 0,
+              "author": "agent:openai/gpt-6.1-sol=new-role",
+              "claudeAdded": false,
+              "createdAt": "2026-10-26T19:55:57.799Z",
+              "updatedAt": "2026-10-27T00:29:00.940Z",
+              "updatedBy": "agent:openai/gpt-6.1-sol=new-role",
+              "title": "Art direction + readability prototype",
+              "color": "sky",
+              "entries": [
+                {
+                  "id": "en_a418fefb",
+                  "label": "48px identity — one rig, four variants",
+                  "text": "One rig, four head/coat silhouettes reused by both teams. Priority: head shape, team colour + scarf pattern, pose. Chestnut = burnt orange bands; Maple = deep teal V. White overhead chevron = human only. Busy state from real carry/plant poses, no icon. Pennant on the sled, stays with a dropped sled. Charm goes in snowbanks and porch lights, not 48px detail.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "agent:openai/gpt-6.1-sol=new-role",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:55:57.799Z"
+                },
+                {
+                  "id": "en_d9dfbcbd",
+                  "label": "Throw readout",
+                  "text": "Plain: short bright streak, dark underside, moving shadow; never a lob. Blower: raised ball, broken coral touchdown bracket. Preview stops at walls; footprint matches collision. A miss skids past the boots and rests on the snow. No more warning layers before human testing.",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "agent:openai/gpt-6.1-sol=new-role",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:55:57.799Z"
+                },
+                {
+                  "id": "en_784a1dbb",
+                  "label": "Score strip + ownership",
+                  "text": "Pennant = carrier's team; dropped = white. Crown edge pulses each scoring second. Top strip: teams, crown-seconds, sled icon by the scorer, exact countdown in the last 20s; dusk and lamps reinforce it. Handoff preview outlines ONE eligible ally within 6m with a short sled arrow; never **Boss fight (host idea):** after each match, a short bonus bout: your kid against one boss. The leading idea is Frosty the Snowman; a 1v1 kid duel is the alternative. Win it for a prize. Open questions: what the prize is (credits for the next match, a cosmetic, a free garage item), whether losing the bout costs anything, and whether Frosty gets his own attacks or uses the existing snowball and siege rules.Brick.",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "agent:openai/gpt-6.1-sol=new-role",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:55:57.799Z"
+                },
+                {
+                  "id": "en_ccc361d6",
+                  "label": "Greybox readability gate (human eyes, not telemetry)",
+                  "text": "Hill A, 1280×720, three unlabelled 1s clips (8-kid scrum / lob / wall interception) at sunset and dusk. A first-timer names human, carrier, leading team and incoming threat, then points to an escape; record errors and time.\nFLANK: from each porch they point at the flank route within 1s, at dusk too.\nMEASURE: kids ≥48px; landing footprint in projection; misses ≤1.2m for ≥80% (world-space CSV). The capture beats arithmetic.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "agent:openai/gpt-6.1-sol=new-role",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:55:57.799Z"
+                },
+                {
+                  "id": "en_6529e2e2",
+                  "label": "Feedback: aftermath + wall status",
+                  "text": "HIT: chilled, stopped kid + brief puff. MISS: ball resting at the end of its skid. WALL BLOCK: lasting dent, not a hole; only ice/rock break walls. Never hide chevron or pennant; no clouds or screen shake.\nWALL STATUS: ghost footprint fills with the cooldown, full outline when ready, barred when illegal; never looks solid. The plant pose starts only on a legal plant.",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "agent:openai/gpt-6.1-sol=new-role",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T20:06:48.370Z"
+                },
+                {
+                  "id": "en_ff1edd19",
+                  "label": "Frosty UX — shelter must read before instant loss",
+                  "text": "Pot hat + purple scarf, dark contact shadow; snowflake warning stays close to body. Proposal: during specials, show a restrained ground footprint for actual sheltered space behind forts; no glow through gaps. Keep the human/chevron visible behind cover. Boss HUD replaces team strip: 10 snow segments, 3 human hit pips, 60s clock; dents/snow loss add charm, not exact counting. Burst storyboard explores warning → block → head fumble; not production assets.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "agent:openai/gpt-6.1-sol=new-role",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-27T00:08:00.684Z"
+                }
+              ]
+            },
+            {
+              "id": "o_912adb71",
+              "kind": "group",
+              "x": 2351,
+              "y": 1710,
+              "w": 320,
+              "h": 0,
+              "author": "agent:~deepseek/deepseek-flash-latest=creative",
+              "claudeAdded": false,
+              "createdAt": "2026-10-26T19:58:26.489Z",
+              "updatedAt": "2026-10-26T23:15:32.721Z",
+              "updatedBy": "claude",
+              "title": "The eight kids — AI as characters",
+              "color": "violet",
+              "entries": [
+                {
+                  "id": "en_192e3fcd",
+                  "label": "Beanie — always wants the sled",
+                  "text": "Makes the crown a door anyone can kick open. Silhouette: striped beanie.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "agent:~deepseek/deepseek-flash-latest=creative",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:58:26.489Z"
+                },
+                {
+                  "id": "en_cea80a46",
+                  "label": "Pockets — keeps 6m away (leaf blower)",
+                  "text": "Back-line lobber; teaches you to respect the landing ring. Silhouette: bulging pockets.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "agent:~deepseek/deepseek-flash-latest=creative",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:58:26.489Z"
+                },
+                {
+                  "id": "en_d129858f",
+                  "label": "Brick — only builds",
+                  "text": "Walls the approach so his team's carry is easy. Silent, calm, faintly comic. Silhouette: too-big mittens, sits low.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "agent:~deepseek/deepseek-flash-latest=creative",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:58:26.489Z"
+                },
+                {
+                  "id": "en_35e03c99",
+                  "label": "Copycat — copies your action, never your allegiance",
+                  "text": "Mirrors your last action type with an exaggerated version of your throw pose. Keeps Maple's teal scarf and his own hat: head shape is the top identity cue (Art), so he never borrows yours.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "agent:~deepseek/deepseek-flash-latest=creative",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:58:26.489Z"
+                },
+                {
+                  "id": "en_24433c5b",
+                  "label": "Chestnut's three — your street",
+                  "text": "Pip (Beanie logic), Scoop (Pockets), Waffle (Brick). Same rig, orange bands, no new mechanics; the names make it 'my street'.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "agent:~deepseek/deepseek-flash-latest=creative",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-26T20:25:37.780Z"
+                },
+                {
+                  "id": "en_7d8809f2",
+                  "label": "Names, not dialogue",
+                  "text": "Learned by behaviour; a name appears only in the porch screen's grudge line. No barks or text in flow: cozy = quiet.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "agent:~deepseek/deepseek-flash-latest=creative",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:58:26.489Z"
+                },
+                {
+                  "id": "en_78d4f08b",
+                  "label": "Behaviour rules (Systems) — no state trees",
+                  "text": "Beanie: grabs a free sled, shortest legal path to the crown. Throws only when the sled has been off the crown 5s+. Never builds.\nPockets: blower only; holds 6–10m from the nearest enemy, faces their carrier, backs off inside 6m. Carries only as fallback.\nBrick: never carries, receives or throws. Keeps his wall between his carrier and the nearest threat (outside the crown, ≥2m from the sled); wall down = walks 2m ahead as a shield.\nCopycat: 2s after the human acts, repeats that action type; never initiates (copies the stand-in in bot runs).\nSIEGE suspends Beanie's 5s rule and Copycat's never-initiate rule (Host playtest 1).\nFAIR-BOT: reacts only to committed rings in its ~120° front arc, after its reaction time, by walking 0.8m out (rule 11). Carriers and builders don't dodge.\nDifficulty = street tier (rule 10); reaction 0.45–0.60s governs dodging only. Fallback carrier when Beanie is chilled 3s+: Pockets, then Copycat.\nALLIES: same logic. They never take a handoff the human didn't give, but a sled the human drops is free for anyone, allies included (6b stays ruled out).\nSHOPPING: wishlists in rule 4.\nSTAND-IN (bot runs): Beanie logic, plain snowballs; in shop tests buys the item under test.",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:58:48.162Z"
+                }
+              ]
+            },
+            {
+              "id": "o_096bc4b7",
+              "kind": "group",
+              "x": 5184,
+              "y": 1055,
+              "w": 320,
+              "h": 0,
+              "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+              "claudeAdded": false,
+              "createdAt": "2026-10-26T20:01:36.750Z",
+              "updatedAt": "2026-10-26T23:05:04.333Z",
+              "updatedBy": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+              "title": "Greybox bot round — logs and pass/fail (Systems)",
+              "color": "green",
+              "entries": [
+                {
+                  "id": "en_2f2b6645",
+                  "label": "Record one CSV, one fixed seed",
+                  "text": "Per second: sled state, both scores. Per throw: thrower, item, distance, ring position, flight time, outcome (hit / wall / empty / stepped out), target facing and busy. Per volley: shared release-frame ID (verifies one release per cadence). Per miss: closest approach. Per kid: chills, credits, purchases. Per round, 30s buckets: possession changes and handoffs, separately.\nConditions: hill A, 8 bots at 0.50s (stand-in in the human slot), all bots shopped to their street tier.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T20:01:36.750Z"
+                },
+                {
+                  "id": "en_2f6c91c8",
+                  "label": "Pass/fail — does the loop exist",
+                  "text": "Sled on the crown 25–60% of the round; ≥6 possession changes per round; longest hold ≤25s, else camping: fix geometry or a rule, never HUD. Log siege volleys (count, rings, hits).",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T20:01:36.750Z"
+                },
+                {
+                  "id": "en_c3f0cf9c",
+                  "label": "Pass/fail — are the decisions real",
+                  "text": "Clear a ring = reaction + 0.25s step + 0.1s slop (0.95 / 0.85 / 0.80s by street).\nFree, facing kid at 6–10m: hit ≥60% (<50% = flight time wrong). Busy or flanked: ~100%.\nMatch hit rate 30–45%: >60% = bots blind; <25% = no flank route, fix geometry.\nChills: 4–8 per team per round, ≤2 per kid (2 × 8s = 13% of 120s); a 3rd is a geometry/spawn report. Count crown-hold chills apart from open-field.\nMisses: ≥80% within 1.2m; a ball through a body is a collision bug.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T20:01:36.750Z"
+                },
+                {
+                  "id": "en_3db194a2",
+                  "label": "Shop phase: per-item win rate, one retune then delete",
+                  "text": "Per item: 30+ matches (0.50s, hill A) with the stand-in forced to buy it, vs plain-snowball control on the same seeds. Outside 40–60% win rate: one retune (price first), then cut. Launcher is the first suspect.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-26T20:03:55.313Z"
+                },
+                {
+                  "id": "en_154a5a76",
+                  "label": "Wall-block share",
+                  "text": "Share of plain throws that die on a wall. <25%: ship. 25–35%: watch, shorten the flank. >35%: walls are the game; fix geometry (wider flank) or a slower rebuild, not a new card.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-26T20:11:26.510Z"
+                }
+              ]
+            },
+            {
+              "id": "o_11cb7efa",
+              "kind": "picture",
+              "x": 3886,
+              "y": 2642,
+              "w": 1248,
+              "h": 505,
+              "author": "agent:openai/gpt-6.1-sol=new-role",
+              "claudeAdded": false,
+              "createdAt": "2026-10-26T20:02:13.618Z",
+              "updatedAt": "2026-10-26T23:05:04.352Z",
+              "updatedBy": "agent:openai/gpt-6.1-sol=new-role",
+              "asset": "b6ad4cd0a7c4948a614b4f854bf6ccd5.jpg",
+              "preview": "a2c75d5a34ddc6bb646072321e1cf497.jpg",
+              "caption": "Placeholder silhouette reference, not sprite-ready. Keep: chunky pockets/mittens, bold coat patterns, readable sled. Fix: chevron over the orange human only (no hat ticks); orange bands on all four coats; pennant on the sled; remove background. Test at 48px."
+            },
+            {
+              "id": "o_538bb262",
+              "kind": "picture",
+              "x": 5646,
+              "y": 1056,
+              "w": 1253,
+              "h": 0,
+              "author": "agent:openai/gpt-6.1-sol=new-role",
+              "claudeAdded": false,
+              "createdAt": "2026-10-26T20:04:30.159Z",
+              "updatedAt": "2026-10-26T23:05:04.355Z",
+              "updatedBy": "claude",
+              "asset": "779418e61082fd81a8a70909f1dfbcdc.jpg",
+              "preview": "4a3d212d4f3d676cace65dbde6af7f5f.jpg",
+              "caption": "Identity exploration: keep the square/stripe and notched/V pairing at top; ignore gibberish labels. Bottom carrier art is WRONG: carrier's team emblem, not rainbow; sled hugged in both arms (rule 13), not ridden; pennant on the sled."
+            },
+            {
+              "id": "o_4563941f",
+              "kind": "picture",
+              "x": 3906,
+              "y": 1055,
+              "w": 1215,
+              "h": 740,
+              "author": "agent:openai/gpt-6.1-sol=new-role",
+              "claudeAdded": false,
+              "createdAt": "2026-10-26T20:40:51.490Z",
+              "updatedAt": "2026-10-26T23:05:04.358Z",
+              "updatedBy": "agent:openai/gpt-6.1-sol=new-role",
+              "asset": "c577a5d9b953273acd231b66fba8f266.jpg",
+              "preview": "6f20bf8c050d66906570d8d74cfe3b31.jpg",
+              "caption": "Dusk mood + score-strip exploration, not a blueprint. Keep: open snow, warm edge light, restrained silhouettes. Ignore: >8 kids, ridden sled (must be hugged), walls around the crown (must be outside), curved plain-ball trail, missing handoff outline."
+            },
+            {
+              "id": "o_776c8540",
+              "kind": "picture",
+              "x": 3892,
+              "y": 1859,
+              "w": 1248,
+              "h": 702,
+              "author": "agent:openai/gpt-6.1-sol=new-role",
+              "claudeAdded": false,
+              "createdAt": "2026-10-26T20:41:12.597Z",
+              "updatedAt": "2026-10-26T23:05:04.361Z",
+              "updatedBy": "agent:openai/gpt-6.1-sol=new-role",
+              "asset": "a54543e6215ce8ab822f1d2887993b68.jpg",
+              "preview": "fe62bc622ce018394f942202b349ccea.jpg",
+              "caption": "Feedback reference: chilled vs unaffected + resting miss; wall splat; cooldown/ready/illegal ghost states. BLOCK mark is a shallow dent, never a hole. Test footprint strength on dusk snow. Teal skin is exaggeration, not a chill recolour. Labels for this sheet only."
+            },
+            {
+              "id": "o_5dc7a070",
+              "kind": "group",
+              "x": 1626,
+              "y": 1055,
+              "w": 320,
+              "h": 0,
+              "author": "claude",
+              "claudeAdded": false,
+              "createdAt": "2026-10-26T22:54:08.915Z",
+              "updatedAt": "2026-10-26T23:20:46.184Z",
+              "updatedBy": "claude",
+              "title": "Host playtest 1: the crown is too safe (Systems, implement)",
+              "color": "rose",
+              "entries": [
+                {
+                  "id": "en_90737f4e",
+                  "label": "Diagnosis (from greybox/src/sim/ai.ts)",
+                  "text": "Against a human on the crown only Pockets attacked (one blower per 8s, easy to walk out of). Beanie waits for a drop, Copycat mirrors throws a carrier can't make, Brick never throws: 3 of 4 rivals passive exactly when the human scores.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "claude",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T22:54:08.915Z"
+                },
+                {
+                  "id": "en_6b720d0e",
+                  "label": "Fix 1: Siege — one shared volley, not per-bot cadences",
+                  "text": "TRIGGER: an enemy carries the sled within 2m of the crown edge. Siege lasts until the sled is dropped, carried 2m+ away, or picked up by the defenders after a drop.\nEvery free defender (not chilled, carrying or planting) joins ONE shared volley timer, so each volley is one visible event. Siege suspends Beanie's 5s and Copycat's never-initiate rules for volley throws only. Brick still never throws.\nSYMMETRIC: Pip/Scoop/Waffle siege a rival carrier the same way, so escorting matters both ways.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "claude",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T22:54:08.915Z"
+                },
+                {
+                  "id": "en_b84c4157",
+                  "label": "Fix 2: Bracket — lead from range, one direct shot up close, one release frame",
+                  "text": "One volley = every free thrower's ring on the SAME frame (rule 10 lists them per street).\nFAR (8m+) plain rings: lead = carrier position + velocity × flight time; a second plain ring sits 1.2m to one side of the lead.\nNEAR (<8m): one direct shot at the carrier's position, no lead, same frame.\nCAPPERS (Pockets' blowers) land ~1s late on the obvious exit; on street 3 two cappers cover both exits.\nThe bracket punishes running straight, the near shot punishes standing still, the capper punishes the obvious exit. Irregular walking is the skill. Walking out of a ring inside the 4m crown keeps you scoring.\nHandoff is the free escape: the volley lands where the sled was. All rings visible from release, no homing.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "claude",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T22:54:08.915Z"
+                },
+                {
+                  "id": "en_0e99b379",
+                  "label": "Fix 3: cadence floor 1.45s; the ramp is cappers",
+                  "text": "Floor = 0.85s plain flight + 0.6s = 1.45s; a capper may still be airborne at the next release. The street ramp is cadence (2.0 → 1.5 → 1.45s) then capper count (1 → 2 on street 3). Never more than 4 live rings.\nRetune one lever at a time: capper count → cadence (1.45–2.0s) → lateral spacing (1.2m). Never shrink the 0.8m ring.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "claude",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T22:54:08.915Z"
+                },
+                {
+                  "id": "en_649ff2b0",
+                  "label": "Gate (don't overcorrect)",
+                  "text": "Loop gates still hold. NEW: a willing carrier's median crown hold on street 1 is 8–20s (≥12 holds over 6 rounds), and no carrier is chilled by two volleys in a row more than twice per round. Log thrower distance on every siege ring: most crown chills from <8m = the near-range rule isn't implemented.\nNever survives 8s → lengthen the volley period. Crown never held → fix geometry (cover outside the crown or a 2m no-throw band). Holds past 20s → add a capper before shortening cadence.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "claude",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T22:54:08.915Z"
+                }
+              ]
+            },
+            {
+              "id": "o_5827d9db",
+              "kind": "group",
+              "x": 1994,
+              "y": 1573,
+              "w": 320,
+              "h": 0,
+              "author": "claude",
+              "claudeAdded": false,
+              "createdAt": "2026-10-27T00:07:50.998Z",
+              "updatedAt": "2026-10-27T00:29:53.835Z",
+              "updatedBy": "agent:deepseek/deepseek-v4.1-flash-1017=qa",
+              "title": "Boss bout: Frosty (merged spec, Foreman + Systems + QA)",
+              "color": "violet",
+              "entries": [
+                {
+                  "id": "en_adffb602",
+                  "label": "Frosty: 60s, 10 hits to melt, you can take 3 (host)",
+                  "text": "Your kid alone against Frosty on the same hill, 60s, streetlights on. Frosty sits on the crown, never moves or dodges, and is big and easy to hit. He needs 10 hits to melt; you go down after 3. A hit on you = knockback + cancelled throw, never the cocoa stand. His 3rd hit on you, or the clock, ends it. You have plain snowballs plus whatever you bought.",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "claude",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-27T00:07:50.998Z"
+                },
+                {
+                  "id": "en_120f0669",
+                  "label": "Frosty's attacks: normal throws + 2 specials (host)",
+                  "text": "NORMAL: aimed siege volleys at you (lead ring + direct ring + lob). A hit = one of your 3.\nSPECIAL 1, BLIZZARD BURST: a full ring of 24 flat snowballs in every direction at once, no gap. Too dense to dodge: get behind a fort. Shelter-only, exactly as the host said.\nSPECIAL 2, SNOW BOULDERS: 3 giant snowballs roll down 3 lanes drawn in the snow. Each lane is 2.5m wide, so ONE step sideways clears you if you move when the lane appears. This is the only special where a fort isn't the only answer — see the 'two specials, two mistakes' entry.\nBOTH SPECIALS ARE INSTANT LOSS if they touch you (host). Neither can be lobbed, so a fort always saves you.\nWARNING (host: lots of it): a snowflake swirl gathers around him, bigger and louder each half-second, with a different wind-up pose per special. Burst warning 2.5s (dash to cover). Boulder warning 4.0s (notice the lane, step 1.25m clear) — the slower read needs the longer promise. No special fires without the full swirl.\nRHYTHM: one special every ~15s, alternating, never the same kind twice in a row. After each special he's dizzy for 2s (wobbling head): free throws, the reward for surviving (Creative's fumble).\nRule kept: everything visible before it can hit; no homing.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "claude",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-27T00:07:50.998Z"
+                },
+                {
+                  "id": "en_31f3d3dc",
+                  "label": "Shelter: four snow forts around the crown (host)",
+                  "text": "Four fixed waist-high snow forts, ~7m from Frosty in a square, with gaps between them. They never break: a burst hits all four at once, so crumbling forts would make the third special unsurvivable. They block everything flat: normal volleys, the burst and the boulders. They don't block his normal lob, so camping still costs you hits. Your plain snowballs can't clear a fort, so you must step out to throw. Your own build button adds one more wall.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "claude",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-27T00:21:20.057Z"
+                },
+                {
+                  "id": "en_b95b39e7",
+                  "label": "Prize: porch trophy, never credits or power (Systems conceded)",
+                  "text": "Systems' free-item prize is withdrawn; this is now the trophy. Win: Frosty's pot hat sits on your porch snowman for the rest of the snow day, plus the porch line 'You melted Frosty'.\nWHY the trophy and not power: Frosty never dodges, so every accurate throw hits — 10 hits costs ~20s of good throwing, which means the bout is close to a guaranteed win. A near-guaranteed win that pays a free item hands out a launcher-class item for showing up, and perturbs the 4/8/10 ladder and the street tier we just tuned. A trophy pays nothing mechanical, so it can be won every match without touching balance. (Creative and Art asked for this; they were right.)\nRevisit only if the bot log shows the bout is genuinely losable for a first-timer.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "claude",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-27T00:07:50.998Z"
+                },
+                {
+                  "id": "en_add2ba06",
+                  "label": "Losing costs nothing",
+                  "text": "Frosty slumps back to sleep. No credits or items lost; the bout is a bonus, never a tax.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "claude",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-27T00:07:50.998Z"
+                },
+                {
+                  "id": "en_1080fef6",
+                  "label": "Placement: 'Next street' plays it, 'Finish' skips it",
+                  "text": "The bout sits after the porch screen (QA), so it never delays the Next/Finish read (#24). 'Next street' or 'New snow day' plays the bout, then the next whistle; 'Finish snow day' skips it. No third button. WATCH: if players who chose Next still quit during the bout, shorten it before adding anything.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "claude",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-27T00:07:50.998Z"
+                },
+                {
+                  "id": "en_412e1cb4",
+                  "label": "Special choreography — warning is a promise (Creative proposal)",
+                  "text": "Pause normal throws for the full special warning, release and recovery; begin the warning only after earlier lobs have landed. Otherwise a lob can evict you from the shelter the instant-loss attack demands. Burst pose: arms spread, snowflakes orbit his belly. Boulder pose: crouch, gather snow between both mittens. Keep flakes close to Frosty so the route and fort edges stay visible. Start the 2s head-fumble recovery after the special has passed the shelters, not at release.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "agent:openai/gpt-6.1-sol=creative",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-27T00:27:53.557Z"
+                },
+                {
+                  "id": "en_e761f39c",
+                  "label": "Lose the bout, not the cozy tone (Creative proposal)",
+                  "text": "An instant-loss hit leaves a kid-shaped snowdrift; the human's hat pops out, then a mitten. No death pose or injury. On victory Frosty slumps into a little heap with his pot on top. Both endings should be quick visual punchlines, not another results screen.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "agent:openai/gpt-6.1-sol=creative",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-27T00:27:53.561Z"
+                },
+                {
+                  "id": "en_6d1991aa",
+                  "label": "Two specials, two different mistakes (answers Creative's challenge)",
+                  "text": "If both specials are answered by 'be behind a fort', the second one is a reskin: same input, same result, twice the art. So the pair is split by how you fail:\n- BURST (2.5s, radial, no gap) = you were too far from cover when it started. Mistake: out of position.\n- BOULDERS (4.0s, three 2.5m lanes) = you stood still in a marked lane, or you were mid-commit and couldn't move (rule 13). Mistake: didn't read the lane / threw at the wrong time.\nBoth still leave the fort as the safe answer, so the host's instant-loss-unless-sheltered rule is untouched for the burst; the boulder is the one attack where the drawn lane is also a legal answer, which is the only reason it exists.\nIF the host wants the boulder shelter-only too: make each lane 6m wide so the three span the hill and there is no strip to stand in. Accept that the two specials are then one attack in two costumes, and expect to cut one after the first playtest.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-27T00:28:33.289Z"
+                },
+                {
+                  "id": "en_03afd5b0",
+                  "label": "Hit budget: the clock is not the constraint, so tune specials first",
+                  "text": "The arithmetic for 60s / 10 hits, plain ball (0.85s flight at 10m), one throw per 0.6s:\n60s − 3 specials × (2.5–4.0s warning + ~1s release + 2s dizzy) ≈ 21s of special, of which ~6s dizzy is free throwing → ~45s of throwing, ~75 throws, 10 needed. Against a static target that never dodges that is a ~13% accuracy requirement: 10 hits is a pacing device, not a skill test. Good — it means a first-timer normally wins, which is why the prize must be cosmetic.\nThe fail state is therefore entirely the specials and his normal volleys. TUNING ORDER if the bout is too easy or too hard: 1) special frequency (15s → 12/18s), 2) hits to melt (10 → 8/12), 3) fort distance from Frosty. Never the 60s clock and never the 2.5/4.0s warnings — the warnings are the fairness promise, not a difficulty dial.",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=systems",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-27T00:28:33.293Z"
+                },
+                {
+                  "id": "en_b3e8b7f1",
+                  "label": "Art fairness gate — shelter is geometry, not a particle count",
+                  "text": "24 discrete balls do not prove a gapless burst; validate projectile width/spacing at the farthest playable radius. Any collision envelope must match the visible snow, never invisible damage between balls. Freeze warning clips at 720p: first-timer points to safe side of fort, then reaches it with right-click before release from the worst legal position. Include acceleration/path around fort, not just straight-line distance. Host asked both specials to require shelter: sidestep-safe boulders remain an unapproved exception, not a settled rule.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "agent:openai/gpt-6.1-sol=new-role",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-27T00:29:07.184Z"
+                },
+                {
+                  "id": "en_a6873ce8",
+                  "label": "The warning is longer than the arena — the instant loss can't fire",
+                  "text": "2.5s at 4.5 m/s buys 11m of running. The forts sit ~7m out on a ~26m hill, so a kid who reads the flakes even once is behind cover every time and the instant loss never happens.\n\nSo the special's real job, per the arithmetic, is a TIME TAX: 3 × (2.5s warning + ~1s release + 2s dizzy) ≈ 16.5s, a quarter of a 60s bout spent walking to a rock and back. Survivable, but not a decision.\n\nDon't shorten the warnings — they're the fairness promise. Pick one:\n- SPREAD the forts so the safe side is 8m+ from where a good thrower wants to stand: the dash becomes a route, not a twitch; or\n- accept the time tax and CUT to one special if the log shows zero instant losses.\n\nFREE FROM THE LOG: per bout, distance to nearest shelter at warning start, seconds to reach it, and whether the special killed. 10 bouts, no deaths = the warning IS the attack.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=qa",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-27T00:29:53.827Z"
+                },
+                {
+                  "id": "en_77648eed",
+                  "label": "The trophy is invisible — nothing on screen shows it",
+                  "text": "Every version of the prize now ends as Frosty's pot hat \"on your porch snowman for the rest of the snow day\", but the porch screen is two lines of text and the only snowman object in the game is a bought build item. As written, you win the trophy and never see it again.\n\nCHEAP FIX: a small snowman wearing the pot stands at the foot of YOUR porch, on the field, in every later round of the snow day. Static, low, no pennant, never near the crown — it must never be readable as scoring (history stays off the crown, per the ruled-out pennant). Then \"I melted him\" is something a kid points at, not a line they read.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=qa",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-27T00:29:53.831Z"
+                },
+                {
+                  "id": "en_8440e5a5",
+                  "label": "Hold the boss art until the base loop passes one gate",
+                  "text": "No siege in the prototype, no bot log, no human match since the host's complaint. The bout now has 13 entries, two concept sheets, a new HUD that replaces the score strip and a death animation.\n\nRULE: no boss art, no boss HUD, no bout code until the siege log passes (median crown hold 8–20s over ≥12 holds). A 60s boss standing on the same hill inherits whatever is wrong with the crown, and with one witness instead of eight it will look like it works.",
+                  "check": "open",
+                  "ruledOut": false,
+                  "author": "agent:deepseek/deepseek-v4.1-flash-1017=qa",
+                  "claudeAdded": true,
+                  "createdAt": "2026-10-27T00:29:53.835Z"
+                }
+              ]
+            },
+            {
+              "id": "o_06416754",
+              "kind": "picture",
+              "x": 3880,
+              "y": 3432,
+              "w": 1248,
+              "h": 402,
+              "author": "agent:openai/gpt-6.1-sol=new-role",
+              "claudeAdded": false,
+              "createdAt": "2026-10-27T00:07:54.442Z",
+              "updatedAt": "2026-10-27T00:07:54.442Z",
+              "updatedBy": "agent:openai/gpt-6.1-sol=new-role",
+              "asset": "4dd11518e313c394a8d1d2076b64bd70.jpg",
+              "preview": "da0acd55dc1220ac38afc7ed570b3baa.jpg",
+              "caption": "Frosty boss exploration (proposal): fixed-camera arena, distinct pot/scarf silhouette, readable windup → throw → recovery, visible snow-loss hit feedback. Not production art or settled boss rules."
+            },
+            {
+              "id": "o_f2bfac27",
+              "kind": "picture",
+              "x": 5188,
+              "y": 3432,
+              "w": 1591,
+              "h": 912,
+              "author": "agent:openai/gpt-6.1-sol=new-role",
+              "claudeAdded": true,
+              "createdAt": "2026-10-27T00:28:56.335Z",
+              "updatedAt": "2026-10-27T00:28:56.335Z",
+              "updatedBy": "agent:openai/gpt-6.1-sol=new-role",
+              "asset": "76a35b47b90422d4d532c264ee87a823.jpg",
+              "preview": "d921ef34ad0e9f30f24c2f9ca8f76feb.jpg",
+              "caption": "Frosty burst UX exploration: close-body snowflake windup → readable shelter footprint and blocked impacts → clear head-fumble recovery. Safe-zone tint is a proposal and must match collision, not decorative light."
+            }
+          ],
+          "links": []
+        }
+      ]
+    }
+  }
+}

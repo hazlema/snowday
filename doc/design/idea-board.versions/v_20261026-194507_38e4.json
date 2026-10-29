@@ -1,0 +1,132 @@
+{
+  "meta": {
+    "id": "v_20261026-194507_38e4",
+    "name": "Version 2026-10-26 15:45",
+    "at": "2026-10-26T19:45:07.811Z",
+    "author": "user",
+    "auto": false,
+    "stats": {
+      "groups": 1,
+      "entries": 7,
+      "notes": 0,
+      "pictures": 0,
+      "cards": 0
+    }
+  },
+  "content": {
+    "title": "wargames",
+    "brief": {
+      "sections": [
+        {
+          "id": "s_f8a597e7",
+          "title": "What we're building",
+          "text": "Were designing a cozy isometric snowball fight game.  There are two teams, each team, has 4 players.  This is a single player game so I'm leaving it vague for you to decide.  ",
+          "updatedBy": "user",
+          "updatedAt": "2026-10-26T19:34:17.041Z"
+        }
+      ]
+    },
+    "flow": {
+      "nodes": [],
+      "edges": []
+    },
+    "brainstorm": {
+      "pages": [
+        {
+          "id": "p_main",
+          "name": "Brainstorm",
+          "objects": [
+            {
+              "id": "o_37635d9f",
+              "kind": "group",
+              "x": 2052,
+              "y": 1065,
+              "w": 320,
+              "h": 0,
+              "author": "user",
+              "claudeAdded": false,
+              "createdAt": "2026-10-26T19:34:24.259Z",
+              "updatedAt": "2026-10-26T19:44:58.343Z",
+              "updatedBy": "user",
+              "title": "Snowball fight",
+              "color": "slate",
+              "entries": [
+                {
+                  "id": "en_cae2f492",
+                  "label": "Style",
+                  "text": "Isometric with a cozy aesthetic",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "user",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:36:10.385Z"
+                },
+                {
+                  "id": "en_dbd0495c",
+                  "label": "Players",
+                  "text": "4 AI players + one human",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "user",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:36:40.596Z"
+                },
+                {
+                  "id": "en_c337ee57",
+                  "label": "snowball upgrades",
+                  "text": "Rock Snowballs, Ice Snowballs, Snowball launcher, Snowball Bazooka, Snowball Melter (defensive)",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "user",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:38:11.241Z"
+                },
+                {
+                  "id": "en_d9b4d1cd",
+                  "label": "structures",
+                  "text": "Igloo, Snowman, Snow Fort",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "user",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:42:26.765Z"
+                },
+                {
+                  "id": "en_dd1f825b",
+                  "label": "Scoring",
+                  "text": "Credits based",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "user",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:43:32.750Z"
+                },
+                {
+                  "id": "en_b35f42f9",
+                  "label": "Economy",
+                  "text": "upgrades and structures cost credits",
+                  "check": "none",
+                  "ruledOut": false,
+                  "author": "user",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:44:10.327Z"
+                },
+                {
+                  "id": "en_95f08f4a",
+                  "label": "End Game",
+                  "text": "open question",
+                  "check": "done",
+                  "ruledOut": false,
+                  "author": "user",
+                  "claudeAdded": false,
+                  "createdAt": "2026-10-26T19:41:47.065Z"
+                }
+              ]
+            }
+          ],
+          "links": []
+        }
+      ]
+    }
+  }
+}

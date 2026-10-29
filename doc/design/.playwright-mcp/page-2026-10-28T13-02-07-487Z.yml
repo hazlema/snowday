@@ -1,0 +1,20 @@
+- generic [ref=f4e1]:
+  - generic:
+    - generic:
+      - generic: Chestnut Street presents
+      - generic "Snow Day":
+        - generic: S
+        - generic: "N"
+        - generic: O
+        - generic: W
+        - generic: D
+        - generic: A
+        - generic: "Y"
+      - paragraph: Maple Court is on your hill. Get the toboggan to the topand hold it there till the streetlights come on.
+    - generic [ref=f4e3]:
+      - button "Go outside" [active] [ref=f4e4] [cursor=pointer]
+      - generic [ref=f4e5]:
+        - generic [ref=f4e6]: Right-clickwalk
+        - generic [ref=f4e7]: Left-clickthrow
+        - generic [ref=f4e8]: Middle-clickbuild
+        - generic [ref=f4e9]: Mmute

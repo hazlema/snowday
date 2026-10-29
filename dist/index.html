@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snow Day</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23c4612b'/%3E%3Cg stroke='%23fff' stroke-width='5' stroke-linecap='round'%3E%3Cpath d='M32 12v40M14.7 22l34.6 20M14.7 42l34.6-20'/%3E%3C/g%3E%3C/svg%3E" />
+    <style>
+      html, body { margin: 0; height: 100%; background: #141a2c; overflow: hidden; }
+      body { display: grid; place-items: center; font-family: Nunito, system-ui, sans-serif; }
+      #l1, #l2, button, .name, .ready, .wallet, #hats, .own { font-family: Fredoka, system-ui, sans-serif !important; }
+      canvas { display: block; image-rendering: auto; cursor: crosshair; }
+      #porch {
+        position: fixed; inset: 0; display: grid; place-items: center;
+        background: radial-gradient(ellipse at 50% 35%, rgba(255, 196, 120, 0.28), rgba(20, 26, 44, 0.86) 60%);
+        backdrop-filter: blur(2px);
+      }
+      #porch.hidden { display: none; }
+      .card { text-align: center; color: #fff6ea; padding: 40px 56px; }
+      #l1 { font-size: 40px; font-weight: 800; margin: 0 0 12px; letter-spacing: 0.01em; text-shadow: 0 2px 0 rgba(0,0,0,0.25); }
+      #l2 { font-size: 22px; font-weight: 600; margin: 0 0 36px; color: #f3d9bd; }
+      #btns { display: flex; gap: 20px; justify-content: center; align-items: flex-start; }
+      #btns .slot { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 260px; }
+      #btns .note { font-size: 14px; color: #f3d9bd; line-height: 1.35; min-height: 19px; }
+      /* every button identical: the choice must not be nudged (QA #24) */
+      #btns button {
+        font: 700 20px system-ui, sans-serif; color: #2a1d14; background: #fbe6c8;
+        border: 0; border-radius: 12px; padding: 14px 28px; min-width: 210px; cursor: pointer;
+        box-shadow: 0 4px 0 #b98a5a;
+      }
+      #btns button:hover, #btns button:focus-visible { background: #fff1dc; outline: 3px solid #fff; outline-offset: 2px; }
+      #btns button:active { transform: translateY(2px); box-shadow: 0 2px 0 #b98a5a; }
+      #garage.hidden { display: none; }
+      #garage { margin: -12px auto 28px; max-width: 980px; }
+      .wallet { font-size: 18px; margin-bottom: 14px; color: #f3d9bd; }
+      .wallet b { color: #fff; font-size: 22px; }
+      .shop { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; text-align: left; }
+      .item { background: rgba(255, 246, 234, 0.1); border: 1px solid rgba(255, 230, 200, 0.25); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+      .item.owned { border-color: #f7c999; background: rgba(247, 201, 153, 0.18); }
+      .item .name { font-weight: 800; font-size: 16px; }
+      .item .blurb { font-size: 13px; color: #f0e2d2; flex: 1; line-height: 1.35; }
+      .item .blurb i { color: #f7c999; }
+      .item button { font: 700 15px system-ui, sans-serif; border: 0; border-radius: 8px; padding: 8px; background: #fbe6c8; color: #2a1d14; cursor: pointer; }
+      .item button:disabled { opacity: 0.45; cursor: default; }
+      .item .own { font: 700 13px system-ui, sans-serif; color: #f7c999; padding: 9px 0 6px; text-align: center; }
+      .ready { font-size: 24px; font-weight: 800; margin-bottom: 6px; color: #fff6ea; }
+      .who { font-size: 13px; color: #e8d6c2; margin-top: 10px; }
+      #hats { margin: -20px 0 28px; font-size: 18px; font-weight: 700; color: #f3d9bd; display: flex; gap: 10px; align-items: center; justify-content: center; }
+      #hats.hidden { display: none; }
+      #hats svg { width: 34px; height: 26px; }
+
+      /* ---------------- title: a live demo match plays behind the logo ---------------- */
+      #title {
+        position: fixed; left: 50%; top: 50%; width: var(--cw, 100vw); height: var(--ch, 100vh); transform: translate(-50%, -50%);
+        display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+        padding: calc(var(--ch, 100vh) * 0.07) 0 calc(var(--ch, 100vh) * 0.06); box-sizing: border-box; pointer-events: none; font-family: Fredoka, system-ui, sans-serif; color: #fff6ea;
+        background:
+          radial-gradient(ellipse 70% 42% at 50% 22%, rgba(255, 214, 160, 0.38), rgba(255, 214, 160, 0) 70%),
+          linear-gradient(to bottom, rgba(24, 30, 58, 0.5), rgba(24, 30, 58, 0) 38%, rgba(24, 30, 58, 0) 62%, rgba(24, 30, 58, 0.62));
+        transition: opacity 0.6s ease;
+      }
+      #title.hidden { opacity: 0; visibility: hidden; transition: opacity 0.5s ease, visibility 0s linear 0.5s; }
+      #title .kicker { font-weight: 600; font-size: calc(var(--cw, 100vw) * 0.0145); letter-spacing: 0.32em; text-transform: uppercase; color: #ffe2bf; text-shadow: 0 2px 6px rgba(20, 20, 50, 0.5); margin-bottom: 0.3em; }
+      .logo { display: flex; gap: 0.06em; font-weight: 700; font-size: calc(var(--cw, 100vw) * 0.105); line-height: 1; letter-spacing: 0.01em; animation: bob 4s ease-in-out infinite; }
+      .logo .gap { width: 0.32em; }
+      .logo span.l {
+        position: relative; display: inline-block; color: #f08440;
+        background: linear-gradient(#ffa25e, #e0682c 70%, #c4542a); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+        -webkit-text-stroke: 0.045em #5c2a14; paint-order: stroke fill;
+        filter: drop-shadow(0 0.055em 0 #7a3313) drop-shadow(0 0.1em 0.12em rgba(20, 20, 50, 0.45));
+        transform: rotate(var(--r, 0deg)) translateY(var(--y, 0));
+      }
+      .logo span.l::before {
+        /* a cap of snow on every letter */
+        content: ""; position: absolute; left: var(--cl, 4%); right: var(--cr, 4%); top: calc(0.1em - var(--sh, 0.17em) + 0.17em); height: var(--sh, 0.17em);
+        background: radial-gradient(ellipse 30% 70% at var(--lump, 30%) 10%, #fff 60%, transparent 62%) 0 -0.04em / 100% 100% no-repeat, #ffffff;
+        border-radius: 0.12em 0.14em 0.07em 0.09em / 0.12em 0.1em 0.1em 0.12em;
+        box-shadow: inset 0 -0.03em 0 #cfdcf2, 0 0.015em 0 rgba(92, 42, 20, 0.6);
+        -webkit-text-fill-color: initial; z-index: 1;
+      }
+      .logo span.l::after {
+        /* ...and a drip */
+        content: ""; position: absolute; left: var(--dx, 60%); top: 0.22em; width: 0.07em; height: var(--dh, 0.1em);
+        background: #ffffff; border-radius: 0 0 0.05em 0.05em; z-index: 1;
+      }
+      @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+      #title .tag { margin: 0.9em 0 0; padding: 0.45em 1.3em; border-radius: 999px; background: rgba(28, 32, 62, 0.42); backdrop-filter: blur(3px); font-family: Nunito, system-ui, sans-serif; font-weight: 700; font-size: calc(var(--cw, 100vw) * 0.0135); color: #fff6ea; text-shadow: 0 1px 4px rgba(20, 20, 50, 0.6); text-align: center; line-height: 1.5; }
+      #title .tag b { color: #ffd2a6; }
+      #title .bottom { display: flex; flex-direction: column; align-items: center; gap: 18px; pointer-events: auto; }
+      #title button {
+        font: 700 calc(var(--cw, 100vw) * 0.019) Fredoka, system-ui, sans-serif; color: #2a1d14; background: #fbe6c8;
+        border: 0; border-radius: 16px; padding: 0.55em 1.6em; cursor: pointer; box-shadow: 0 5px 0 #b98a5a, 0 10px 24px rgba(20, 20, 50, 0.35);
+        animation: breathe 2.4s ease-in-out infinite;
+      }
+      #title button:hover, #title button:focus-visible { background: #fff1dc; outline: 3px solid #fff; outline-offset: 3px; }
+      #title button:active { transform: translateY(3px); box-shadow: 0 2px 0 #b98a5a; }
+      @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+      #title .controls { display: flex; gap: 1.6em; font-family: Nunito, system-ui, sans-serif; font-weight: 700; font-size: calc(var(--cw, 100vw) * 0.0105); color: #f3e4d4; text-shadow: 0 1px 3px rgba(20, 20, 50, 0.7); }
+      #title .controls kbd { font: 700 0.85em Fredoka, system-ui, sans-serif; background: rgba(255, 246, 234, 0.16); border: 1px solid rgba(255, 246, 234, 0.4); border-radius: 6px; padding: 2px 7px; margin-right: 6px; color: #fff; }
+    </style>
+    <script type="module" crossorigin src="/assets/index-XzuCrDcF.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index--3eM577J.css">
+  </head>
+  <body>
+    <canvas id="game"></canvas>
+    <div id="porch" class="hidden">
+      <div class="card">
+        <p id="l1"></p>
+        <p id="l2"></p>
+        <div id="hats" class="hidden"></div>
+        <div id="garage" class="hidden"></div>
+        <div id="btns"></div>
+      </div>
+    </div>
+    <div id="title" class="hidden">
+      <div style="display:flex;flex-direction:column;align-items:center">
+        <div class="kicker">Chestnut Street presents</div>
+        <div class="logo" aria-label="Snow Day">
+          <span class="l" style="--r:-4deg;--sh:.2em;--lump:25%;--dx:58%;--dh:.12em">S</span><span class="l" style="--r:2deg;--y:.03em;--sh:.15em;--lump:70%;--dx:30%;--dh:.07em">N</span><span class="l" style="--r:-2deg;--sh:.19em;--lump:45%;--dx:66%;--dh:.14em">O</span><span class="l" style="--r:3deg;--y:.02em;--sh:.16em;--lump:20%;--dx:42%;--dh:.08em">W</span>
+          <span class="gap"></span>
+          <span class="l" style="--r:-3deg;--y:.02em;--sh:.21em;--lump:60%;--dx:36%;--dh:.13em">D</span><span class="l" style="--r:2deg;--cl:18%;--cr:18%;--sh:.15em;--lump:50%;--dx:48%;--dh:.06em">A</span><span class="l" style="--r:-2deg;--y:.03em;--sh:.18em;--lump:35%;--dx:28%;--dh:.11em">Y</span>
+        </div>
+        <p class="tag" id="titleTag"></p>
+      </div>
+      <div class="bottom">
+        <button id="goOutside">Go outside</button>
+        <div class="controls"><span><kbd>Right-click</kbd>walk</span><span><kbd>Left-click</kbd>throw</span><span><kbd>Middle-click</kbd>build</span><span><kbd>M</kbd>mute</span></div>
+      </div>
+    </div>
+  </body>
+</html>
