@@ -1,5 +1,7 @@
 # Snow Day — Greybox Hill A
 
+![Snow Day title screen](doc/screenshots/title.png)
+
 Phase 1 of the build order in `../idea-board.design.md`. Ruleset v4, implemented as written.
 
 ```sh
