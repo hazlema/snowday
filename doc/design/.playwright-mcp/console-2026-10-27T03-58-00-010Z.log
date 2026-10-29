@@ -1,7 +1,0 @@
-[      19ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ http://localhost:5317/src/game/audio.ts?t=1793062592866:80
-[      19ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ http://localhost:5317/src/game/audio.ts?t=1793062592866:81
-[      19ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ http://localhost:5317/src/game/audio.ts?t=1793062592866:80
-[      19ms] [WARNING] The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://developer.chrome.com/blog/autoplay/#web_audio @ http://localhost:5317/src/game/audio.ts?t=1793062592866:81
-[      40ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5317/favicon.ico:0
-[   55159ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5317/favicon.ico:0
-[   56605ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:5317/favicon.ico:0

@@ -1,6 +1,0 @@
-- generic [ref=e4]:
-  - paragraph [ref=e5]: Chestnut Street beat Ivy Terrace
-  - paragraph [ref=e6]: Chestnut 2 – 0 Ivy Terrace
-  - generic [ref=e30]:
-    - button "Next street" [ref=e56] [cursor=pointer]
-    - button "Finish snow day" [ref=e58] [cursor=pointer]
